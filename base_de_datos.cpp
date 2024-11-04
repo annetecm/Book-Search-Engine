@@ -103,7 +103,7 @@ void ordenarPorPuntaje(DynamicArray<Libro>& libros) {
 }
 
 void capturarCategorias(string categorias[], string valores[], int& numFiltros) {
-    cout << "Cuantas categorias desea aplicar? (3 posibles) ";
+    cout << "Cuantas categorias desea aplicar? (1-3) ";
     cin >> numFiltros;
     cin.ignore();
 
@@ -584,14 +584,9 @@ int main()
 {
     DynamicArray<Libro> libros1;
     loadDataIntoArray("libro_final.csv", libros1);
+    int respuesta;
 
-    int id_search;
-    cout << "Ingresa el ID del libro que deseas buscar: ";
-    cin >> id_search;
-
-    cout << "Información del libro (Arreglo):" << endl;
-    buscarPorID(libros1, id_search);
-
+    cout<<"SISTEMA RECOMENDADOR DE LIBROS \n"<<"Opciones: \n"<<"1.Buscar por categoria(Filtrar libros por alguna categoria)\n"<<"2.Sistema recomendador (Elige algunas categorias y obtén recomendaciones)"<<endl;
     /*
     cout << "Información del libro (Lista ligada):" << endl;
     buscarPorIDLista(libros1, id_search);
@@ -602,13 +597,20 @@ int main()
     cout << "Información del libro (Lista doblemente ligada desde final):" << endl;
     buscarPorIDDesdeElFinal(libros1, id_search);
     */
+   do {
+    cout << "Por favor ingresa una opción (1 o 2): ";
+    cin >> respuesta;
 
+    if (respuesta != 1 && respuesta != 2) {
+        cout << "Esa respuesta no es válida. Inténtalo de nuevo.\n";
+    }
+   } while (respuesta != 1 && respuesta != 2);
+   if(respuesta==1){
 //BUSQUEDA BINARIA
     string continuar1;
     do {
         int opcion;
         string categoria, value;
-         cout << "/////////BÚSQUEDA BINARIA/////////\n";
         cout << "Selecciona la categoria por la que deseas buscar en el formato indicado:\n";
         cout << "1. ID\n";
         cout << "2. Titulo(Titulo_Libro): \n";
@@ -695,7 +697,10 @@ int main()
         cin >> continuar2;
     } while (continuar2 == "s"); 
     */
-   const int maxCategorias = 5;
+   }
+   else if(respuesta==2){
+    cout<<"RECOMENDADOR DE LIBROS\n"<<"Elige 1 a 3 categorias por las que quisieras encontrar un libro"<<endl;
+    const int maxCategorias = 5;
     ordenarPorPuntaje(libros1);
 
     string categoriasFiltros[maxCategorias];
@@ -708,7 +713,7 @@ int main()
     agruparPorCategoriasMixtas(libros1, categorias, numCategorias, categoriasFiltros, valoresFiltros, numFiltros);
 
     mostrarPorCategoria(categorias, numCategorias, libros1);
-
+   }
 
     return 0;
 };
