@@ -270,22 +270,37 @@ void agruparPorCategoriasMixtas(const DynamicArray<Libro>& libros, QueueA<Libro>
             int categoriaIndex = -1;
 
             for (int j = 0; j < numCategorias; ++j) {
-                if (categorias[j].front().author == libro.author) {
+                bool categoriaCoincide = true;
+
+                for (int k = 0; k < numFiltros; ++k) {
+                    if (categoriasFiltros[k] == "author" && categorias[j].front().author != libro.author) {
+                        categoriaCoincide = false;
+                    }
+                    else if (categoriasFiltros[k] == "genre" && categorias[j].front().genre != libro.genre) {
+                        categoriaCoincide = false;
+                    }
+                    else if (categoriasFiltros[k] == "publisher" && categorias[j].front().publisher != libro.publisher) {
+                        categoriaCoincide = false;
+                    }
+                }
+
+                if (categoriaCoincide) {
                     categoriaIndex = j;
                     found = true;
                     break;
                 }
             }
-
             if (!found && numCategorias < 10) {
                 categoriaIndex = numCategorias++;
                 categorias[categoriaIndex].push(libro);
-            } else if (found && categorias[categoriaIndex].size() < topN) {
+            } 
+            else if (found && categorias[categoriaIndex].size() < topN) {
                 categorias[categoriaIndex].push(libro);
             }
         }
     }
 }
+
 
 void mostrarPorCategoria(QueueA<Libro>* categorias, int numCategorias) {
     for (int i = 0; i < numCategorias; ++i) {
@@ -324,22 +339,37 @@ void agruparPorCategoriasMixtas(const DynamicArray<Libro>& libros, StackA<Libro>
             int categoriaIndex = -1;
 
             for (int j = 0; j < numCategorias; ++j) {
-                if (categorias[j].top().author == libro.author) {
+                bool categoriaCoincide = true;
+
+                for (int k = 0; k < numFiltros; ++k) {
+                    if (categoriasFiltros[k] == "author" && categorias[j].top().author != libro.author) {
+                        categoriaCoincide = false;
+                    }
+                    else if (categoriasFiltros[k] == "genre" && categorias[j].top().genre != libro.genre) {
+                        categoriaCoincide = false;
+                    }
+                    else if (categoriasFiltros[k] == "publisher" && categorias[j].top().publisher != libro.publisher) {
+                        categoriaCoincide = false;
+                    }
+                }
+
+                if (categoriaCoincide) {
                     categoriaIndex = j;
                     found = true;
                     break;
                 }
             }
-
             if (!found && numCategorias < 10) {
                 categoriaIndex = numCategorias++;
                 categorias[categoriaIndex].push(libro);
-            } else if (found && categorias[categoriaIndex].size() < topN) {
+            } 
+            else if (found && categorias[categoriaIndex].size() < topN) {
                 categorias[categoriaIndex].push(libro);
             }
         }
     }
 }
+
 
 void mostrarPorCategoria(StackA<Libro>* categorias, int numCategorias) {
     for (int i = 0; i < numCategorias; ++i) {
