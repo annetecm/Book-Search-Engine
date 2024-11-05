@@ -260,7 +260,7 @@ void buscarPorID(const DynamicArray<Libro>& arr, int id) {
 }
 
 ////////////////////////////QUEUE///////////////////
-/*
+
 void agruparPorCategoriasMixtas(const DynamicArray<Libro>& libros, QueueA<Libro>* categorias, int& numCategorias, string categoriasFiltros[], string valoresFiltros[], int numFiltros, int topN = 5) {
     for (size_t i = 0; i < libros.size(); ++i) {
         const Libro& libro = libros[i];
@@ -310,7 +310,7 @@ void mostrarPorCategoria(QueueA<Libro>* categorias, int numCategorias) {
         }
     }
 }
-*/
+
 
 
 /////////////////////////////STACK///////////////////////////////
@@ -367,7 +367,8 @@ void mostrarPorCategoria(StackA<Libro>* categorias, int numCategorias) {
 }
 */
 
-////////////////////PRIORITY QUEUE//////////////////////////7
+////////////////////PRIORITY QUEUE//////////////////////////
+/*
 void agruparPorCategoriasMixtas(const DynamicArray<Libro>& libros, PriorityQueue* categorias, int& numCategorias, string categoriasFiltros[], string valoresFiltros[], int numFiltros, int topN = 5) {
     for (size_t i = 0; i < libros.size(); ++i) {
         const Libro& libro = libros[i];
@@ -429,6 +430,8 @@ void mostrarPorCategoria(PriorityQueue* categorias, int numCategorias, const Dyn
         }
     }
 }
+
+*/
 
 //BUSQUEDA BINARIA
 int particion(DynamicArray<Libro>& arr, int low, int high, const string& categoria) {
@@ -708,12 +711,12 @@ int main()
     int numFiltros = 0;
     capturarCategorias(categoriasFiltros, valoresFiltros, numFiltros);
 
-    PriorityQueue categorias[maxCategorias];
+   QueueA<Libro> categorias[maxCategorias];
     int numCategorias = 0;
     agruparPorCategoriasMixtas(libros1, categorias, numCategorias, categoriasFiltros, valoresFiltros, numFiltros);
 
-    mostrarPorCategoria(categorias, numCategorias, libros1);
-   }
+    mostrarPorCategoria(categorias, numCategorias);
 
     return 0;
+   } 
 };
